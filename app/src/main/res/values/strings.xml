@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QRScanner</string>
+
+        info
+    <string name="info_camera_permission_denied">The camera permission has been denied.</string>
+    <string name="info_enable_camera_permission">Please go into settings and enable camera permission.</string>
+</resources>
