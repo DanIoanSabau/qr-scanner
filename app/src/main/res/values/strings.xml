@@ -4,4 +4,7 @@
         info
     <string name="info_camera_permission_denied">The camera permission has been denied.</string>
     <string name="info_enable_camera_permission">Please go into settings and enable camera permission.</string>
+
+        placeholder
+    <string name="placeholder_qr_text">Here will appear the text when the scan is successful.</string>
 </resources>

@@ -4,16 +4,15 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -52,16 +51,24 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
                 ) {
                     when {
                         permissionState.hasPermission -> {
-                            var text by remember { mutableStateOf("") }
+                            val textPlaceHolder = stringResource(R.string.placeholder_qr_text)
+                            var text by remember { mutableStateOf(textPlaceHolder) }
 
                             Camera { text = it }
 
+                            Spacer(modifier = Modifier.height(64.dp))
+
                             Text(
                                 text = text,
+                                textAlign = TextAlign.Center,
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier
@@ -71,12 +78,14 @@ class MainActivity : ComponentActivity() {
                         }
                         permissionState.shouldShowRationale -> {
                             Text(
-                                text = stringResource(R.string.info_camera_permission_denied)
+                                text = stringResource(R.string.info_camera_permission_denied),
+                                textAlign = TextAlign.Center
                             )
                         }
                         permissionState.isPermanentlyDeclined -> {
                             Text(
-                                text = stringResource(R.string.info_enable_camera_permission)
+                                text = stringResource(R.string.info_enable_camera_permission),
+                                textAlign = TextAlign.Center
                             )
                         }
                     }
